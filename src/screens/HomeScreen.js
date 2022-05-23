@@ -4,8 +4,8 @@ import
 MaterialCommunityIcons
     from 'react-native-vector-icons/MaterialCommunityIcons';
 import { FlatList } from "react-native-gesture-handler";
-import { LinearGradient } from "expo-linear-gradient";
-
+import Item from "../components/lastOrder";
+import Item2 from "../components/favRes";
 
 const DATA = [
     {
@@ -38,38 +38,16 @@ const DATA2 = [
     }
 ]
 
-const Item = ({ title, price }) => (
-    <View style={styles.lastOrder}>
-        <Text style={styles.lastOrderText}>{title}</Text>
-        <Text style={styles.lastOrderPrice}>{price}</Text>
-    </View>
-);
 
-const Item2 = ({ point, title }) => (
-    <View style={styles.fav}>
-        <View style={styles.favCard}>
-            <View style={styles.favPoint}>
-                <Text style={styles.favPointText}>{point}</Text>
-            </View>
-
-            <Text style={styles.favTitle}>{title}</Text>
-        </View>
-        <LinearGradient
-            colors={["#000", "transparent"]}
-            style={styles.favLinGra}
-        >
-
-        </LinearGradient>
-    </View>
-)
 
 const HomeScreen = ({ navigation }) => {
     const renderItem = ({ item }) => (
         <Item title={item.title} price={item.price} />
     )
     const renderItem2 = ({ item }) => (
-        <Item2 point={item.point} title={item.title} />
+        <Item2 point={item.point} title={item.title} onPress= {() => navigation.navigate("Restourant")} />
     )
+
     return (
         <View style={styles.backColor}>
             <View style={styles.topSize}>
@@ -142,6 +120,7 @@ const styles = StyleSheet.create({
         color: "#D31919",
         fontSize: 14,
         marginTop: 10,
+        marginBottom: 10,
         fontWeight: "bold"
     },
     blackTexts: {
@@ -149,61 +128,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontWeight: "bold"
     },
-    lastOrder: {
-        backgroundColor: "#fff",
-        marginTop: 1,
-        flexDirection: "row",
-        justifyContent: "space-between"
-    },
-    lastOrderText: {
-        fontSize: 18,
-        margin: 10,
-    },
-    lastOrderPrice: {
-        fontSize: 18,
-        fontWeight: "bold",
-        color: "#4CAF50",
-        margin: 10,
-        marginRight: 20
-    },
-    favPoint: {
-        height: 50,
-        width: 50,
-        backgroundColor: "#4CAF50",
-        justifyContent: "center",
-        alignItems: "center",
-        borderRadius: 25,
-        margin: 20
-    },
-    favCard: {
-        flexDirection: "row",
-        alignItems: "center"
-
-    },
-    favPointText: {
-        fontWeight: "bold",
-        color: "#fff"
-    },
-    favTitle: {
-        fontSize: 18,
-        marginLeft: 5,
-        fontWeight: "bold",
-    },
-    favForeGround: {
-    },
-    favLinGra: {
-        height: 90,
-        width: 90,
-        transform: [{ rotate: "90deg" }],
-
-    },
-    fav: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        backgroundColor: "#fff",
-        marginTop: 2,
-        alignItems: "center"
-    }
 });
 
 export default HomeScreen;

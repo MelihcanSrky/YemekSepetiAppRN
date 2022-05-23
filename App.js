@@ -8,6 +8,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import BasketScreen from './src/screens/BasketScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
+import DetailScreen from './src/screens/DetailsScreen';
 import
 MaterialCommunityIcons
   from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -15,37 +16,35 @@ MaterialCommunityIcons
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const DATA = [
-  {
-    id: "1",
-    title: "Yemek 1",
-  },
-  {
-    id: "2",
-    title: "Yemek 2"
-  },
-  {
-    id: "3",
-    title: "Yemek 3"
-  }
-]
-
-// const Item = ({item, onPress, backGroundColor, textColor}) => (
-
-// )
+function StackNav() {
+  return (
+    <NavigationContainer
+      independent = {true}
+    >
+      <Stack.Navigator
+        initialRouteName='HomeScreen'
+      >
+        <Stack.Screen name='Welcome' component={HomeScreen} />
+        <Stack.Screen name='Restourant' component={DetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <NavigationContainer
+    independent = {true}
+    >
       <Tab.Navigator
         initialRouteName="Home"
-
+        screenOptions={{ "tabBarHideOnKeyboard": "true" }}
       >
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={StackNav}
           options={{
-            headerTitle: "Welcome",
+            headerShown: false,
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name='home'
@@ -108,7 +107,6 @@ export default function App() {
           }}
         >
         </Tab.Screen>
-
       </Tab.Navigator>
     </NavigationContainer>
   );
